@@ -6,21 +6,13 @@ export default function Page() {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h1>Create your account</h1>
+        <h1>Welcome Back 👋</h1>
 
         <p className={styles.subtitle}>
-          Join us and manage your tasks smarter.
+          Sign in to continue managing your tasks.
         </p>
 
         <form className={styles.form}>
-
-          <div className={styles.inputGroup}>
-            <label>Full Name</label>
-            <input 
-              type="text" 
-              placeholder="Enter your name"
-            />
-          </div>
 
           <div className={styles.inputGroup}>
             <label>Email</label>
@@ -38,23 +30,15 @@ export default function Page() {
             />
           </div>
 
-          <div className={styles.inputGroup}>
-            <label>Confirm Password</label>
-            <input 
-              type="password" 
-              placeholder="Confirm your password"
-            />
-          </div>
-
           <button type="submit">
-            Create Account
+            Sign In
           </button>
 
         </form>
 
         <p className={styles.login}>
-          Already have an account?
-          <Link href={"/signin"}> Sign In</Link>
+          Don't have an account?
+          <Link href={"/signup"}> Sign Up</Link>
         </p>
 
       </div>
