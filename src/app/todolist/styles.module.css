@@ -313,3 +313,172 @@
     font-size: 12px;
 
 }
+
+/* =========================
+   Responsive
+========================= */
+
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+
+    .container {
+        padding: 25px;
+    }
+
+
+    .top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+    }
+
+
+    .top h1 {
+        font-size: 30px;
+    }
+
+
+    .addButton {
+        width: 100%;
+    }
+
+
+    .board {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+
+    .container {
+
+        padding: 18px;
+
+    }
+
+
+
+    .top h1 {
+
+        font-size: 26px;
+
+    }
+
+
+
+    .top p {
+
+        font-size: 14px;
+
+    }
+
+
+
+    .board {
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+    }
+
+
+
+    .column {
+
+        min-height: auto;
+
+        padding: 18px;
+
+    }
+
+
+
+    .search input {
+
+        height: 48px;
+
+        font-size: 14px;
+
+    }
+
+
+
+    .card {
+
+        padding: 15px;
+
+    }
+
+
+}
+
+
+
+/* Small Mobile */
+
+@media (max-width: 400px) {
+
+
+    .container {
+
+        padding: 14px;
+
+    }
+
+
+
+    .top h1 {
+
+        font-size: 23px;
+
+    }
+
+
+
+    .columnTitle h2 {
+
+        font-size: 16px;
+
+    }
+
+
+
+    .card h3 {
+
+        font-size: 15px;
+
+    }
+
+
+
+    .card p {
+
+        font-size: 13px;
+
+    }
+
+
+
+    .cardFooter {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+
+    }
+
+}
