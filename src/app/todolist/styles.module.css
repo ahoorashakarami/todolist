@@ -102,7 +102,7 @@
 
 .search input {
 
-    width: 100%;
+    width: 97.5%;
 
     height: 52px;
 
@@ -408,8 +408,8 @@
     .search input {
 
         height: 48px;
-
         font-size: 14px;
+        width: 90.5%;
 
     }
 
