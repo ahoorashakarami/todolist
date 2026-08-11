@@ -34,7 +34,9 @@ export async function POST(req) {
         if (createUser) {
             return Response.json({ "message": "User Created Successfully!" }, {
                 status: 201,
-                headers: { 'Set-Cookie': `token=${token}` }
+                headers: {
+                    "Set-Cookie": `token=${token}; Path=/; Max-Age=172800; HttpOnly; SameSite=Lax`
+                }
             })
         } else {
             return Response.json({ "message": "Unknown Internal Server Error!" }, {
