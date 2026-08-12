@@ -1,9 +1,19 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import styles from "./styles.module.css";
+import AddTodo from "@/components/modules/auth/newtaskhandler/NewTaskHandler";
 
 export default function TodoListPage() {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <main className={styles.container}>
+
+      {/* New Task Modal  */}
+
+      <AddTodo isOpen={showModal} onClose={() => setShowModal(false)} />
+
 
       <section className={styles.top}>
 
@@ -16,7 +26,7 @@ export default function TodoListPage() {
         </div>
 
 
-        <button className={styles.addButton}>
+        <button className={styles.addButton} onClick={() => setShowModal(true)}>
           + Add Task
         </button>
 
@@ -29,8 +39,6 @@ export default function TodoListPage() {
           placeholder="Search tasks..."
         />
       </div>
-
-
 
       <section className={styles.board}>
 
@@ -52,26 +60,18 @@ export default function TodoListPage() {
           />
 
         </Column>
-
-
-
-
         <Column
           title="In Progress"
           count="2"
         >
 
           <TaskCard
-            title="Build Authentication"
-            desc="Create login and register"
-            priority="High"
+            title="Setup Next.js"
+            desc="Initialize project"
+            priority="Low"
           />
 
         </Column>
-
-
-
-
 
         <Column
           title="Done"
