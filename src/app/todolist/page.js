@@ -7,6 +7,18 @@ import SuccessModal from "@/components/components/SuccessModal"
 export default function TodoListPage() {
   const [showModal, setShowModal] = useState(false);
 
+  const fetchTodos = async () => {
+    const res = await fetch("/api/todos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    console.log(data.todos);
+  };
+
+
   return (
     <main className={styles.container}>
 
@@ -16,6 +28,12 @@ export default function TodoListPage() {
 
 
       <section className={styles.top}>
+
+        {/* TEST BUTTON */}
+
+        <button onClick={fetchTodos}>Test</button>
+
+        {/* TEST BUTTON */}
 
         <div>
           <h1>My Tasks</h1>
