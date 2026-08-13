@@ -1,10 +1,13 @@
+// This Project is Under Development, Codes Might Change in the Future.
+
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import AddTodo from "@/components/modules/auth/newtaskhandler/NewTaskHandler";
 import SuccessModal from "@/components/components/SuccessModal"
 
 export default function TodoListPage() {
+  const [userTodos, setUserTodos] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const fetchTodos = async () => {
@@ -15,17 +18,25 @@ export default function TodoListPage() {
       },
     });
     const data = await res.json();
-    console.log(data.todos);
+    if (res.status === 200) {
+      setUserTodos(data.todos);
+    }
+
+
   };
 
+  // Temporary
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
 
   return (
     <main className={styles.container}>
 
       {/* New Task Modal  */}
 
-      <AddTodo isOpen={showModal} onClose={() => setShowModal(false)} />
-
+      <AddTodo fetchTodos={fetchTodos} isOpen={showModal} onClose={() => setShowModal(false)} />
 
       <section className={styles.top}>
 
@@ -66,17 +77,13 @@ export default function TodoListPage() {
           title="Todo"
           count="4"
         >
-          <TaskCard
-            title="Create UI Design"
-            desc="Design the dashboard layout"
-            priority="High"
-          />
 
-          <TaskCard
-            title="Learn MongoDB"
-            desc="Connect database"
-            priority="Medium"
-          />
+          {userTodos.map((todo) => (
+            <TaskCard
+              key={todo._id}
+              {...todo}
+            />
+          ))}
 
         </Column>
         <Column
@@ -84,11 +91,6 @@ export default function TodoListPage() {
           count="2"
         >
 
-          <TaskCard
-            title="Setup Next.js"
-            desc="Initialize project"
-            priority="Low"
-          />
 
         </Column>
 
@@ -149,7 +151,7 @@ function Column({ title, count, children }) {
 
 
 
-function TaskCard({ title, desc, priority }) {
+function TaskCard({ title, isDone, isInProgress }) {
 
   return (
 
@@ -159,16 +161,10 @@ function TaskCard({ title, desc, priority }) {
         {title}
       </h3>
 
-
-      <p>
-        {desc}
-      </p>
-
-
       <div className={styles.cardFooter}>
 
         <span className={styles.priority}>
-          {priority}
+          {isDone ? "Done" : isInProgress ? "In Progress" : "Incomplete"}
         </span>
 
 

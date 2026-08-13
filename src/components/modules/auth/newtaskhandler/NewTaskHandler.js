@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "./styles.module.css";
 import SuccessModal from "@/components/components/SuccessModal";
 
-export default function TodoModal({ isOpen, onClose }) {
+export default function TodoModal({ isOpen, onClose, fetchTodos }) {
 
     // States
     const [title, setTitle] = useState("");
@@ -33,7 +33,7 @@ export default function TodoModal({ isOpen, onClose }) {
         onClose();
         setShowSuccessModal(true)
         setSuccessModalMessage(data.message)
-
+        fetchTodos();
     };
 
 
