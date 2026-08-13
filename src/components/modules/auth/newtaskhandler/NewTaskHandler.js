@@ -1,11 +1,16 @@
 "use client";
-
 import React, { useState } from "react";
 import styles from "./styles.module.css";
+import SuccessModal from "@/components/components/SuccessModal";
 
 export default function TodoModal({ isOpen, onClose }) {
 
+    // States
     const [title, setTitle] = useState("");
+
+    // Success Modal States
+    const [showSuccessModal, setShowSuccessModal] = useState(false)
+    const [successModalMessage, setSuccessModalMessage] = useState("")
 
     const createTodo = async (e) => {
         e.preventDefault();
@@ -22,70 +27,80 @@ export default function TodoModal({ isOpen, onClose }) {
             body: JSON.stringify(todo),
         });
 
-        if (res.status === 201) {
-            setTitle("");
-            onClose();
-        }
+        const data = await res.json()
+
+        setTitle("");
+        onClose();
+        setShowSuccessModal(true)
+        setSuccessModalMessage(data.message)
+
     };
-
-
-    if (!isOpen) return null;
 
 
     return (
         <>
-            <div className={styles.overlay}>
 
-                <div className={styles.modal}>
+            {/* Success Modal */}
 
-                    <div className={styles.header}>
-                        <h2>Create New Task</h2>
-                        <button
-                            className={styles.close}
-                            onClick={onClose}
-                        >
-                            ×
-                        </button>
-                    </div>
+            <SuccessModal isOpen={showSuccessModal} message={successModalMessage} onClose={() => setShowSuccessModal(false)} />
 
+            {/* Success Modal */}
 
-                    <p className={styles.subtitle}>
-                        Add a new task and keep your workflow organized.
-                    </p>
+            {isOpen && (
+                <div className={styles.overlay}>
 
+                    <div className={styles.modal}>
 
-                    <form
-                        className={styles.form}
-                        onSubmit={createTodo}
-                    >
-
-                        <div className={styles.inputGroup}>
-                            <label>
-                                Task Name
-                            </label>
-
-                            <input
-                                type="text"
-                                placeholder="Enter your task..."
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
-                                required
-                            />
+                        <div className={styles.header}>
+                            <h2>Create New Task</h2>
+                            <button
+                                className={styles.close}
+                                onClick={onClose}
+                            >
+                                ×
+                            </button>
                         </div>
 
 
-                        <button
-                            className={styles.button}
-                            type="submit"
-                        >
-                            Create Task
-                        </button>
+                        <p className={styles.subtitle}>
+                            Add a new task and keep your workflow organized.
+                        </p>
 
-                    </form>
+
+                        <form
+                            className={styles.form}
+                            onSubmit={createTodo}
+                        >
+
+                            <div className={styles.inputGroup}>
+                                <label>
+                                    Task Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    placeholder="Enter your task..."
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+
+                            <button
+                                className={styles.button}
+                                type="submit"
+                            >
+                                Create Task
+                            </button>
+
+                        </form>
+
+                    </div>
 
                 </div>
+            )}
 
-            </div>
         </>
     );
 }

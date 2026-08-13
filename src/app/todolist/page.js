@@ -1,8 +1,8 @@
 "use client";
-
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import AddTodo from "@/components/modules/auth/newtaskhandler/NewTaskHandler";
+import SuccessModal from "@/components/components/SuccessModal"
 
 export default function TodoListPage() {
   const [showModal, setShowModal] = useState(false);
@@ -39,6 +39,7 @@ export default function TodoListPage() {
           placeholder="Search tasks..."
         />
       </div>
+
 
       <section className={styles.board}>
 
