@@ -5,10 +5,16 @@ import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import AddTodo from "@/components/modules/auth/newtaskhandler/NewTaskHandler";
 import SuccessModal from "@/components/components/SuccessModal"
+import { FaTrash, FaPlay } from "react-icons/fa";
 
 export default function TodoListPage() {
+  // Todos
   const [userTodos, setUserTodos] = useState([]);
+
+  // Modal States
   const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalStatus, setModalStatus] = useState("")
 
   const fetchTodos = async () => {
     const res = await fetch("/api/todos", {
@@ -31,6 +37,31 @@ export default function TodoListPage() {
     fetchTodos();
   }, []);
 
+  // Delete / Start Todo Handlers
+
+  const deleteTodo = async (todoID) => {
+
+    const res = await fetch(`/api/todos/${todoID}`, {
+      method: "DELETE",
+    });
+
+    const data = await res.json();
+
+    await fetchTodos();
+
+    if (res.status === 200) {
+      setModalStatus("success") 
+    } else {
+      setModalStatus("Fail")
+    }
+    setShowModal(true)
+    setModalMessage(data.message)
+  };
+
+  const handleStartTodo = async (todoId) => {
+    // Codes
+  }
+
   return (
     <main className={styles.container}>
 
@@ -38,14 +69,11 @@ export default function TodoListPage() {
 
       <AddTodo fetchTodos={fetchTodos} isOpen={showModal} onClose={() => setShowModal(false)} />
 
+      {/* Success Modal */}
+
+      <SuccessModal isOpen={showModal} onClose={() => setShowModal(false)} message={modalMessage} status={modalStatus} />
+
       <section className={styles.top}>
-
-        {/* TEST BUTTON */}
-
-        <button onClick={fetchTodos}>Test</button>
-
-        {/* TEST BUTTON */}
-
         <div>
           <h1>My Tasks</h1>
 
@@ -60,7 +88,6 @@ export default function TodoListPage() {
         </button>
 
       </section>
-
 
       <div className={styles.search}>
         <input
@@ -82,6 +109,8 @@ export default function TodoListPage() {
             <TaskCard
               key={todo._id}
               {...todo}
+              onDelete={() => deleteTodo(todo._id)}
+              onStart={() => handleStartTodo(todo._id)}
             />
           ))}
 
@@ -151,7 +180,13 @@ function Column({ title, count, children }) {
 
 
 
-function TaskCard({ title, isDone, isInProgress }) {
+function TaskCard({
+  title,
+  isDone,
+  isInProgress,
+  onDelete,
+  onStart
+}) {
 
   return (
 
@@ -161,22 +196,47 @@ function TaskCard({ title, isDone, isInProgress }) {
         {title}
       </h3>
 
+
       <div className={styles.cardFooter}>
 
+
         <span className={styles.priority}>
-          {isDone ? "Done" : isInProgress ? "In Progress" : "Incomplete"}
+          {
+            isDone
+              ? "Done"
+              : isInProgress
+                ? "In Progress"
+                : "Incomplete"
+          }
         </span>
 
 
-        <span className={styles.date}>
-          Today
-        </span>
+        <div className={styles.actions}>
+
+          <button
+            className={styles.startBtn}
+            onClick={onStart}
+            title="Start Task"
+          >
+            <FaPlay />
+          </button>
+
+
+          <button
+            className={styles.deleteBtn}
+            onClick={onDelete}
+            title="Delete Task"
+          >
+            <FaTrash />
+          </button>
+
+        </div>
+
 
       </div>
 
 
     </div>
 
-  )
-
+  );
 }

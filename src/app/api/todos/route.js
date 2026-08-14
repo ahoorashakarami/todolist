@@ -55,6 +55,6 @@ export async function GET(req) {
         return Response.json({ todos }, { status: 200 });
     } catch (err) {
         console.log(err);
-        return Response.json({ message: "Inter server error happened!" }, { status: 500 });
+        return Response.json({ message: "Internal server error happened!" }, { status: 500 });
     }
 }
