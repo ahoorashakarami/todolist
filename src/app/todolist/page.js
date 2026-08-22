@@ -203,16 +203,32 @@ export default function TodoListPage() {
                 onDelete={() => deleteTodo(todo._id)}
 
                 onStart={() => handleStartTodo(todo._id)}
-
               />
 
             ))
           }
         </Column>
-
         <Column
           title="Done"
-        />
+        >
+
+          {
+            userTodos.filter((todo) => todo.isDone).map((todo) => (
+
+              <TaskCard
+
+                key={todo._id}
+
+                {...todo}
+
+                onDelete={() => deleteTodo(todo._id)}
+
+                onStart={() => handleStartTodo(todo._id)}
+              />
+
+            ))
+          }
+        </Column>
 
 
       </section>
@@ -243,12 +259,7 @@ function Column({ title, children }) {
         </h2>
       </div>
 
-
-
       {children}
-
-
-
     </div>
 
   );

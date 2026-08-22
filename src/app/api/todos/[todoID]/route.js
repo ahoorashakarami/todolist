@@ -83,30 +83,51 @@ export async function PUT(req, { params }) {
             );
         }
 
+        if (todo.isInProgress === true) {
+            const updatedTodo = await todoModel.findByIdAndUpdate(
+                todoID,
+                {
+                    isInProgress: false,
+                    isDone: true
+                },
+                {
+                    new: true
+                }
+            );
 
 
-        const updatedTodo = await todoModel.findByIdAndUpdate(
-            todoID,
-            {
-                isInProgress: true,
-                isDone: false
-            },
-            {
-                new: true
-            }
-        );
+
+            return Response.json(
+                {
+                    message: "Todo done successfully!",
+                },
+                {
+                    status: 200
+                }
+            );
+        } else {
+            const updatedTodo = await todoModel.findByIdAndUpdate(
+                todoID,
+                {
+                    isInProgress: true,
+                    isDone: false
+                },
+                {
+                    new: true
+                }
+            );
 
 
 
-        return Response.json(
-            {
-                message: "Todo started successfully!",
-            },
-            {
-                status: 200
-            }
-        );
-
+            return Response.json(
+                {
+                    message: "Todo started successfully!",
+                },
+                {
+                    status: 200
+                }
+            );
+        }
 
     } catch (error) {
 
