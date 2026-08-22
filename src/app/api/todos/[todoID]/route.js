@@ -105,6 +105,15 @@ export async function PUT(req, { params }) {
                     status: 200
                 }
             );
+        } else if (todo.isDone === true) {
+            return Response.json(
+                {
+                    message: "Todo is done",
+                },
+                {
+                    status: 400
+                }
+            );
         } else {
             const updatedTodo = await todoModel.findByIdAndUpdate(
                 todoID,
