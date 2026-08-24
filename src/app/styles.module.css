@@ -1,0 +1,242 @@
+.container {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+
+    background:
+        radial-gradient(circle at top,
+            rgba(37, 99, 235, .18),
+            transparent 40%),
+        #050505;
+
+
+    padding: 20px;
+
+}
+
+
+
+.card {
+
+    width: 650px;
+
+    max-width: 95%;
+
+
+    text-align: center;
+
+
+    padding: 60px 45px;
+
+
+    background:
+        rgba(10, 10, 10, .75);
+
+
+    border-radius: 30px;
+
+
+    border:
+        1px solid rgba(59, 130, 246, .25);
+
+
+
+    box-shadow:
+
+        0 30px 90px rgba(0, 0, 0, .8),
+
+        0 0 50px rgba(37, 99, 235, .1);
+
+
+
+    animation: show .5s ease;
+
+}
+
+
+
+.card h1 {
+
+    color: white;
+
+
+    font-size: 48px;
+
+
+    letter-spacing: -1px;
+
+
+    margin-bottom: 20px;
+
+
+}
+
+
+
+.subtitle {
+
+    color: #94a3b8;
+
+
+    font-size: 18px;
+
+
+    line-height: 1.8;
+
+
+    margin-bottom: 40px;
+
+}
+
+
+
+
+.button {
+
+    display: inline-flex;
+
+
+    justify-content: center;
+
+    align-items: center;
+
+
+    padding: 15px 45px;
+
+
+    border-radius: 15px;
+
+
+    text-decoration: none;
+
+
+    color: white;
+
+
+    font-weight: 600;
+
+
+    font-size: 16px;
+
+
+
+    background:
+        linear-gradient(135deg,
+            #2563eb,
+            #1d4ed8);
+
+
+
+    transition: .25s;
+
+
+}
+
+
+
+.button:hover {
+
+    transform: translateY(-4px);
+
+
+    box-shadow:
+
+        0 15px 35px rgba(37, 99, 235, .35);
+
+}
+
+
+
+
+
+.author {
+
+    margin-top: 45px;
+
+
+    color: #64748b;
+
+
+    font-size: 14px;
+
+
+}
+
+
+
+.author a {
+
+    color: #3b82f6;
+
+
+    text-decoration: none;
+
+
+    transition: .2s;
+
+}
+
+
+
+.author a:hover {
+
+    color: #60a5fa;
+
+}
+
+
+
+
+
+@keyframes show {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px) scale(.95);
+
+    }
+
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0) scale(1);
+
+    }
+
+}
+
+
+
+
+@media(max-width:600px) {
+    .card {
+
+        padding: 45px 25px;
+
+    }
+
+    .card h1 {
+
+        font-size: 32px;
+
+    }
+
+    .subtitle {
+
+        font-size: 15px;
+
+    }
+
+}
