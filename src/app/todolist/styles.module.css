@@ -565,3 +565,10 @@
 .actions button:active {
     transform: scale(.92);
 }
+
+.emptyMessage {
+    text-align: center;
+    color: #71717a;
+    font-size: 14px;
+    margin-top: 10px;
+}

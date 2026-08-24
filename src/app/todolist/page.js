@@ -164,10 +164,17 @@ export default function TodoListPage() {
       </div>
 
       <section className={styles.board}>
+
         <Column
           title="Todo"
         >
-
+          {
+            userTodos.filter((todo) => !todo.isDone && !todo.isInProgress).length === 0 && (
+              <p className={styles.emptyMessage}>
+                No tasks available. Click "Add Task" to create one.
+              </p>
+            )
+          }
           {
             userTodos.filter((todo) => !todo.isDone && !todo.isInProgress).map((todo) => (
 
@@ -190,7 +197,13 @@ export default function TodoListPage() {
         <Column
           title="In Progress"
         >
-
+          {
+            userTodos.filter((todo) => todo.isInProgress).length === 0 && (
+              <p className={styles.emptyMessage}>
+                No tasks available. Click "Add Task" to create one.
+              </p>
+            )
+          }
           {
             userTodos.filter((todo) => todo.isInProgress).map((todo) => (
 
@@ -212,6 +225,13 @@ export default function TodoListPage() {
           title="Done"
         >
 
+          {
+            userTodos.filter((todo) => todo.isDone).length === 0 && (
+              <p className={styles.emptyMessage}>
+                No tasks available. Click "Add Task" to create one.
+              </p>
+            )
+          }
           {
             userTodos.filter((todo) => todo.isDone).map((todo) => (
 
