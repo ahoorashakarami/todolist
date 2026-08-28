@@ -28,8 +28,7 @@ async function getTodos() {
   const todos = await todoModel
     .find({ user: payload.id })
     .lean();
-
-
+    
   return JSON.parse(JSON.stringify(todos));
 
 }
