@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./styles.module.css";
 import Link from "next/link";
 import AuthModal from "@/components/authmodal";
+import { validateName, validateEmail, validatePassword } from "@/utils/auth";
 
 export default function Page() {
   // States
@@ -22,11 +23,54 @@ export default function Page() {
   const signUp = async (e) => {
     e.preventDefault();
 
-    if (password == confirmPassword) {
+    // Name validation
+    if (!validateName(fullName)) {
+      setModalStatus("error");
+      setModalTitle("Invalid Name");
+      setModalMessage(
+        "The name must only contain English letters, spaces, hyphens, or apostrophes."
+      );
+      setIsModalOpen(true);
+      return;
+    }
+
+    // Email validation
+    if (!validateEmail(email)) {
+      setModalStatus("error");
+      setModalTitle("Invalid Email");
+      setModalMessage(
+        "Please enter a valid email address (e.g., name@domain.com)."
+      );
+      setIsModalOpen(true);
+      return;
+    }
+
+    // Password validation
+    if (!validatePassword(password)) {
+      setModalStatus("error");
+      setModalTitle("Invalid Password");
+      setModalMessage(
+        "The password must have at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
+      );
+      setIsModalOpen(true);
+      return;
+    }
+
+    // Confirm password
+    if (password !== confirmPassword) {
+      setModalStatus("error");
+      setModalTitle("Sign Up Failed");
+      setModalMessage("Passwords do not match.");
+      setIsModalOpen(true);
+      return;
+    }
+
+    // Signup request
+    try {
       const userData = {
         name: fullName,
         email,
-        password
+        password,
       };
 
       const res = await fetch("/api/auth/signup", {
@@ -34,7 +78,7 @@ export default function Page() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(userData),
       });
 
       const data = await res.json();
@@ -43,15 +87,24 @@ export default function Page() {
         setModalStatus("success");
         setModalTitle("Account Created");
         setModalMessage(data.message);
-        setIsModalOpen(true);
       } else {
         setModalStatus("error");
         setModalTitle("Sign Up Failed");
         setModalMessage(data.message);
-        setIsModalOpen(true);
       }
+
+      setIsModalOpen(true);
+
+    } catch (error) {
+      console.error(error);
+
+      setModalStatus("error");
+      setModalTitle("Something Went Wrong");
+      setModalMessage("Unable to connect to the server. Please try again.");
+      setIsModalOpen(true);
     }
-  }
+  };
+
   return (
     <>
       {/* modal */}

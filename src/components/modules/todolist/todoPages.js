@@ -93,15 +93,10 @@ export default function TodoListClient({ todos }) {
                 >
                     + Add Task
                 </button>
-
-
             </section>
 
             <section className={styles.board}>
-
-
                 <Column title="Todo">
-
                     {userTodos.filter(
                         todo => !todo.isDone && !todo.isInProgress
                     ).length === 0 && (
@@ -125,7 +120,6 @@ export default function TodoListClient({ todos }) {
                 </Column>
 
                 <Column title="In Progress">
-
                     {userTodos.filter(
                         todo => todo.isInProgress
                     ).length === 0 && (
@@ -133,7 +127,6 @@ export default function TodoListClient({ todos }) {
                                 No tasks available. Start a task to see it here.
                             </p>
                         )}
-
                     {userTodos
                         .filter(todo => todo.isInProgress)
                         .map(todo => (
@@ -145,11 +138,9 @@ export default function TodoListClient({ todos }) {
                             />
                         ))
                     }
-
                 </Column>
 
                 <Column title="Done">
-
                     {userTodos.filter(
                         todo => todo.isDone
                     ).length === 0 && (
@@ -157,7 +148,6 @@ export default function TodoListClient({ todos }) {
                                 No tasks available. Finish a task to see it here.
                             </p>
                         )}
-
                     {userTodos
                         .filter(todo => todo.isDone)
                         .map(todo => (
@@ -169,7 +159,6 @@ export default function TodoListClient({ todos }) {
                             />
                         ))
                     }
-
                 </Column>
             </section>
         </>
@@ -177,37 +166,17 @@ export default function TodoListClient({ todos }) {
 }
 
 function Column({ title, children }) {
-
     return (
-
         <div className={styles.column}>
-
-
             <div className={styles.columnTitle}>
-
                 <h2>
                     {title}
                 </h2>
-
             </div>
-
-
             {children}
-
-
         </div>
-
     )
-
 }
-
-
-
-
-
-
-
-
 
 function TaskCard({
     title,
@@ -249,38 +218,21 @@ function TaskCard({
 
 
                 <div className={styles.actions}>
-
-
                     <button
                         className={styles.startBtn}
                         onClick={onStart}
                     >
-
                         <FaPlay />
-
                     </button>
-
-
 
                     <button
                         className={styles.deleteBtn}
                         onClick={onDelete}
                     >
-
                         <FaTrash />
-
                     </button>
-
-
                 </div>
-
-
             </div>
-
-
-
         </div>
-
     )
-
 }

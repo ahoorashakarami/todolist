@@ -33,4 +33,19 @@ const verifyToken = (token) => {
     }
 }
 
-export { hashPassword, generateToken, comparePass, verifyToken }
+const validateName = (name) => {
+    const pattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+    return pattern.test(name)
+}
+
+const validatePassword = (password) => {
+    const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    return pattern.test(password)
+}
+
+const validateEmail = (email) => {
+    const pattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/
+    return pattern.test(email)
+}
+
+export { hashPassword, generateToken, comparePass, verifyToken, validateName, validatePassword, validateEmail }
