@@ -15,7 +15,6 @@ Contact @ahoorashakarami on Telegram for questions, more information and bug rep
 ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)
 ![css](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-
 ## Usage
 
 Clone the repository
@@ -37,3 +36,21 @@ npm run dev
 ```
 
 Note: You need mongodb and mongodb compass **Installed** on your device for this project to work
+
+## Screenshots
+
+### Home
+
+![Home Page](./public/screenshots/main.png)
+
+### Sign In
+
+![Sign In Page](./public/screenshots/signin.png)
+
+### Sign Up
+
+![Sign Up Page](./public/screenshots/signup.png)
+
+### Todo List
+
+![Todo List](./public/screenshots/todolist.png)
