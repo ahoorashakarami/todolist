@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 
 
 async function getTodos() {
-
   await connectToDB();
 
   const cookieStore = await cookies();
@@ -24,13 +23,11 @@ async function getTodos() {
     return [];
   }
 
-
   const todos = await todoModel
     .find({ user: payload.id })
     .lean();
     
   return JSON.parse(JSON.stringify(todos));
-
 }
 
 export default async function TodoListPage() {

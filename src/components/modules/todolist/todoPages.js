@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import AddTodo from "@/components/modules/auth/newtaskhandler/NewTaskHandler";
 import SuccessModal from "@/components/components/SuccessModal";
@@ -22,6 +22,10 @@ export default function TodoListClient({ todos }) {
         }
 
     }
+
+    useEffect(() => {
+        fetchTodos()
+    }, [])
 
     const deleteTodo = async (todoID) => {
         const res = await fetch(`/api/todos/${todoID}`, {
