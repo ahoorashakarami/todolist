@@ -1,11 +1,9 @@
 # Todo Manager
 
 ## About
-A responsive Todo Manager built with **Next.js** and **MongoDB**.
+A responsive Todo Manager built with **Next.js**.
 This project was created as a portfolio project to practice web development, authentication, database management, and modern UI development.
 
-Note: This project is currently under development.
-Contact @ahoorashakarami on Telegram for questions, more information and bug report
 ## Technologies
 
 ![NextJs](https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
